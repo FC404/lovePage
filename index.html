@@ -25,7 +25,8 @@
     <button id="autoPlay">自动播放</button>
 
     <button id="toggleMusicBtn">🎵</button>
-    <audio id="bgMusic" src="/music/佐仓小小千代 - 『第一季ED5』小小恋歌.mp3" loop></audio>
+    <audio id="bgMusic" src="music/佐仓小小千代 - 『第一季ED5』小小恋歌.mp3" loop></audio>
+
 
   </div>
 
@@ -38,13 +39,14 @@
   <script>
 
     // CountAPI 统计访问次数
-    fetch('https://api.countapi.xyz/hit/love-page/liuliang&value=0')
-      .then(res => res.json())
-      .then(data => {
-        const counter = document.getElementById("visitCounter");
-        counter.textContent = `总访问次数：${data.value}`;
-      })
-      .catch(err => console.error("访问计数失败", err));
+    fetch('https://api.countapi.xyz/hit/love-page/liuliang')
+  .then(res => res.json())
+  .then(data => {
+    const counter = document.getElementById("visitCounter");
+    counter.textContent = `总访问次数：${data.value}`;
+  })
+  .catch(err => console.error("访问计数失败", err));
+
 
     const toggleMusicBtn = document.getElementById("toggleMusicBtn");
     const bgMusic = document.getElementById("bgMusic");
