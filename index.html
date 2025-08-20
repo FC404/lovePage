@@ -32,21 +32,7 @@
   </div>
 
 
-  <div>
-    <!-- 访问次数显示 -->
-    <p id="visitCounter">总访问次数：0</p>
-  </div>
-
   <script>
-
-    // CountAPI 统计访问次数
-    fetch('https://api.countapi.xyz/v2/workspaces/459/liuliang')
-  .then(res => res.json())
-  .then(data => {
-    const counter = document.getElementById("visitCounter");
-    counter.textContent = `总访问次数：${data.value}`;
-  })
-  .catch(err => console.error("访问计数失败", err));
 
 
     const toggleMusicBtn = document.getElementById("toggleMusicBtn");
