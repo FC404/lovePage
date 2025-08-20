@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 关键: 移动端适配 -->
+  <title>Love Page</title>
+  <link rel="icon" href="images/heart144.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <img id="heart" src="images/heart144.png" alt="heart">
+  <h1 id="you">YOU</h1>
+
+  <div class="controls">
+    <select id="resolution">
+      <option value="144">144p</option>
+      <option value="240">240p</option>
+      <option value="480">480p</option>
+      <option value="720">720p</option>
+      <option value="1080">1080p</option>
+    </select>
+    <button id="autoPlay">自动播放</button>
+
+    <button id="toggleMusicBtn">🎵</button>
+    <audio id="bgMusic" src="/music/佐仓小小千代 - 『第一季ED5』小小恋歌.mp3" loop></audio>
+
+  </div>
+
+
+  <div>
+    <!-- 访问次数显示 -->
+    <p id="visitCounter">总访问次数：0</p>
+  </div>
+
+  <script>
+
+    // CountAPI 统计访问次数
+    fetch('https://api.countapi.xyz/hit/love-page/liuliang&value=0')
+      .then(res => res.json())
+      .then(data => {
+        const counter = document.getElementById("visitCounter");
+        counter.textContent = `总访问次数：${data.value}`;
+      })
+      .catch(err => console.error("访问计数失败", err));
+
+    const toggleMusicBtn = document.getElementById("toggleMusicBtn");
+    const bgMusic = document.getElementById("bgMusic");
+
+    bgMusic.volume = 0.3; // 设置音量
+
+    toggleMusicBtn.addEventListener("click", () => {
+      if (bgMusic.paused) {
+        bgMusic.play();
+        toggleMusicBtn.textContent = "暂停";
+      } else {
+        bgMusic.pause();
+        toggleMusicBtn.textContent = "🎵";
+      }
+    });
+
+
+    const heartImg = document.getElementById("heart");
+    const resolution = document.getElementById("resolution");
+    const you = document.getElementById("you");
+    const autoPlayBtn = document.getElementById("autoPlay");
+
+    const options = ["144", "240", "480", "720", "1080"];
+    let autoPlayInterval = null;
+
+    function updateDisplay(value) {
+      if (value === "1080") {
+        heartImg.style.display = "none";
+        you.style.display = "block";
+      } else {
+        you.style.display = "none";
+        heartImg.style.display = "block";
+        document.body.style.background = "#0d0d0d";
+        heartImg.src = `images/heart${value}.png`;
+      }
+    }
+
+    resolution.addEventListener("change", () => {
+      updateDisplay(resolution.value);
+    });
+
+    autoPlayBtn.addEventListener("click", () => {
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = null;
+        autoPlayBtn.textContent = "自动播放";
+      } else {
+        let index = 0;
+        autoPlayInterval = setInterval(() => {
+          resolution.value = options[index];
+          updateDisplay(options[index]);
+          index++;
+          if (index >= options.length) {
+            clearInterval(autoPlayInterval);
+            autoPlayInterval = null;
+            autoPlayBtn.textContent = "自动播放";
+          }
+        }, 1500);
+        autoPlayBtn.textContent = "停止";
+      }
+    });
+  </script>
+</body>
+
+</html>

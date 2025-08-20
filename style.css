@@ -1,0 +1,132 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background: #0d0d0d;
+    font-family: Arial, sans-serif;
+    transition: background 1s ease;
+  }
+
+  img {
+    max-width: 80%;
+    /* 在手机上不会超出屏幕 */
+    margin-bottom: 20px;
+    transition: all 0.8s ease;
+    animation: glow 2s infinite alternate;
+  }
+
+  .controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    /* 小屏幕时换行 */
+    justify-content: center;
+  }
+
+  select,
+  button {
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  select {
+    border: 1px solid #555;
+    background: #fff;
+    color: #111;
+    min-width: 120px;
+  }
+
+  #heart {
+    width: 300px;
+  }
+
+  button {
+    border: none;
+    background: #ff0000;
+    color: #fff;
+  }
+
+  button:hover {
+    background: #cc0000;
+  }
+
+  #you {
+    display: none;
+    font-family: 'Great Vibes', cursive;
+    font-size: 120px;
+    color: #ff0000;
+    text-shadow: 0 0 30px rgba(255, 0, 0, 0.9);
+    animation: breathe 3s infinite;
+  }
+
+  @keyframes breathe {
+
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    50% {
+      transform: scale(1.1);
+      opacity: 0.85;
+    }
+  }
+
+  @keyframes glow {
+    from {
+      filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.6));
+    }
+
+    to {
+      filter: drop-shadow(0 0 35px rgba(255, 0, 0, 1));
+    }
+  }
+
+  /* 移动端优化 */
+  @media (max-width: 600px) {
+    #you {
+      font-size: 60px;
+      /* 小屏幕字体缩小 */
+    }
+
+    select,
+    button {
+      font-size: 14px;
+      padding: 8px 10px;
+    }
+  }
+
+  .you-text {
+    font-size: 72px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  /* 默认 PC 端：渐变色 */
+  .you-text {
+    background: linear-gradient(to right, #ff4e50, #f9d423);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* 移动端：去掉渐变，使用纯色 */
+  @media (max-width: 768px) {
+    .you-text {
+      background: none;
+      -webkit-text-fill-color: #ff4e50;
+      /* 单一爱心红色 */
+    }
+  }
+
+  #visitCounter{
+    color: #fff;
+  }
